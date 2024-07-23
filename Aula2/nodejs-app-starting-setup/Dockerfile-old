@@ -11,16 +11,10 @@ WORKDIR /app
 # diretorio onde vou rodar os comandos
 
 
-COPY package.json /app 
-
-# usando o caminho completo (absoluto) || eu preferivel
+COPY . ./
+# COPY . /app # também pode usar o caminho completo (absoluto) || eu acho preferivel
 
 RUN npm i
-
-COPY . /app 
-# evita que a cada alteração na aplicação o conteiner tenha que reinstalar tudo de novo em sua construção 
-# Agora que o camado do comando copy está abaixo da npm i uma alteração nele apenas interferirá nos comandos a baixo do copy
-# porém caso o package json seja atualizado deverá reinstalar as dependencias por isso esse arquivo foi importado antes
 
 # expõe a porta 80 do conteiner
 EXPOSE 80
