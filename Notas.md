@@ -44,9 +44,9 @@ sudo docker stop serene_faraday # para a execução do container
 docker start CONTAINER_NAME # executa um container já criado || que foi parado
 docker start -a CONTAINER_NAME # executa um container já criado e faz attach (fica ouvindo os seus logs no terminal) NÃO PERMITE INPUTS
 docker start -a -i CONTAINER_NAME # executa um container já criado e faz attach (fica ouvindo os seus logs no terminal) E PERMITE INPUTS
-
+sudo docker rm <NomeContêiner1> <NomeContêiner2> <etc...>
 ➜  sudo docker rm $(sudo docker ps -a -q) ## remove todos os containers
-
+# NÃO pode remover um contêiner em execução --> causa erro
 
 
 docker attach <containerID_Or_Name> ## ouvir o container --> ver as saidas dos outputs
@@ -54,6 +54,137 @@ docker attach <containerID_Or_Name> ## ouvir o container --> ver as saidas dos o
 
 docker logs <containerID_Or_Name> # ver os logs passados do container (outuputs passados )
 docker logs -f <containerID_Or_Name> # ver os logs passados e os futuros (f - follow)
+
+
+
+➜  docker run -i b8  # Faz com que seja possivel adicionar inputs exemplo do arquivo da aula 3 
+➜  sudo docker run -it b8   # o -it faz com que o terminal do docker seja exposto para a gnt        --- adiciona inputs e outputs       
+
+docker images  # Lista as imagens do docker
+
+docker rmi d2c94e258dcb  # remove as imagens 
+
+
+anahelena in Docker-Kubernetes on  main [!] 
+➜  docker rmi b86551c2461f
+Error response from daemon: conflict: unable to delete b86551c2461f (must be forced) - image is being used by stopped container 55fb2e390f16
+anahelena in Docker-Kubernetes on  main [!] 
+➜  docker rmi d2c94e258dcb            
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:1408fec50309afee38f3535383f5b09419e6dc0925bc69891e79d84cc4cdcec6
+Deleted: sha256:d2c94e258dcb3c5ac2798d32e1249e42ef01cba4841c2234249495f87264ac5a
+Deleted: sha256:ac28800ec8bb38d5c35b49d45a6ac4777544941199075dff8c4eb63e093aa81e
+
+docker image prune # remove todas as imagens que não estão sendo usadas por nenhum container parado ou em execução
+
+anahelena in Docker-Kubernetes/Aula2/nodejs-app-starting-setup on  main [!] 
+➜  docker image inspect 9f223
+[
+    {
+        "Id": "sha256:9f223900b052f60301ca92f8c3d0729d8f73becd149a37febe307e5c0046e78e",
+        "RepoTags": [],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2024-07-26T23:35:02.500876611-03:00",
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NODE_VERSION=22.5.1",
+                "YARN_VERSION=1.22.22"
+            ],
+            "Cmd": [
+                "node",
+                "server.js"
+            ],
+            "ArgsEscaped": true,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 1119145813,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/3mu183v2k1amwonsdqq5dges2/diff:/var/lib/docker/overlay2/04z2l2lshzcum9gvm8gbr3o9p/diff:/var/lib/docker/overlay2/61l8t30ml7hxjzaqeandhc9iv/diff:/var/lib/docker/overlay2/39870a467a4b3e1948c7e805312e44055e017bc7b3f30c8d2cb7a8e88ae29b22/diff:/var/lib/docker/overlay2/5ef33fbe243bb2de115b420a75a9941ca9cf12cfc9a9adf642618cd8cd6323c9/diff:/var/lib/docker/overlay2/f1843089c5107c3ae2d6c9941efbdc03f64275b4ac79afa604ee932418a345a3/diff:/var/lib/docker/overlay2/447e38220a7a99c39a6e50b165f4d3326e9ab38bbd2a1a3a12eb7b3b65cf4c93/diff:/var/lib/docker/overlay2/ffefc490d3081bc5c07dfd61e759deb41d04de6b4c1bcd713a95ee3e2158b551/diff:/var/lib/docker/overlay2/f0346d03d17293df5d7321d151b7db32774547914937f47026af8a150a2983e9/diff:/var/lib/docker/overlay2/d25202ef3f3840fd22450a3a5cf97539a57f177608d0f640045340e74ffea7e9/diff:/var/lib/docker/overlay2/5fc9956c538ea71a4f79d480c12c6c80bd3cfc2a420f161bb203426184e957d1/diff",
+                "MergedDir": "/var/lib/docker/overlay2/9xwa66dnk9oe2b9s86kekzg8o/merged",
+                "UpperDir": "/var/lib/docker/overlay2/9xwa66dnk9oe2b9s86kekzg8o/diff",
+                "WorkDir": "/var/lib/docker/overlay2/9xwa66dnk9oe2b9s86kekzg8o/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:f6faf32734e0870d82ea890737958fe33ce9ddfed27b3b157576d2aadbab3322",
+                "sha256:7cfafa82cfd2b6a92aeb90093e38fb88fa4377948d71bd970d11a51bae16d2f1",
+                "sha256:0905150af928fc88e784dcad5ba98d5f3c2ab28c51c30ac7c7aa8599100cf02f",
+                "sha256:ffe60aac26fce04aa507ee52ebf97f2da44fa5a2b475099d4260349c3e1cc329",
+                "sha256:a0a8f41c2784069ce80bc1d189f2efc6cf76d00d7bc5edfb5468c06c5c54679c",
+                "sha256:bcfeeb82a3a003b8d58e615fb5aa0613fc212dabb04150b9fe1bcdaecccee6da",
+                "sha256:8f32fd06b28e54b08fdec4b8d6fbd25e82a5bab554351af4c3d5449e7d089a73",
+                "sha256:9335ea658be8ff8f0bad9ab51573034c6e835b84e6b39b3565e7b983388b87ea",
+                "sha256:fe3daa0449fdbc6077c8758c7ff0c1757296bd9ddaa0b36d6ba3cde5b05abf53",
+                "sha256:a311c26f1001dff7f1caf6d55643d42e25c1033bf02c37ed8347e49b901b95f4",
+                "sha256:bfc0981ccc0d184bcb78b0c59aecbde242bad23ea681d86caf0d527b677d5ce6",
+                "sha256:31c2d9bbd4eea9c5de673882ba2a5fea90d6ddd510d8fc5ad433696cad1e58f0"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+
+
+docker run --help 
+            --rm # remove o contêiner quando sai de execução
+docker run -p 3000:80 -d --rm 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```
 #### Rodar docker do DockerHub
@@ -79,14 +210,6 @@ Status: Downloaded newer image for node:latest
 Welcome to Node.js v22.3.0.
 Type ".help" for more information.
 > 
-
-
-➜  docker run -i b8  # Faz com que seja possivel adicionar inputs exemplo do arquivo da aula 3 
-➜  sudo docker run -it b8   # o -it faz com que o terminal do docker seja exposto para a gnt        --- adiciona inputs e outputs       
-
-
-```
-
 
 ## Docker ps
 
