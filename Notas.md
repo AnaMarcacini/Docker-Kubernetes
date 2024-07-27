@@ -161,24 +161,48 @@ docker run --help
             --rm # remove o contêiner quando sai de execução
 docker run -p 3000:80 -d --rm 
 
+docker cp <caminhoDoDocumento> <NomeContêiner>:/<pastaDoContêiner> # copia arquivo para contêiner em execução
+# EXEMPLO:
+docker cp pasta/. 5cb9f3aa34db:/teste # copia todos os arquivos da pasta chamada pasta para um contêiner em execução
+
+# O inverso também funciona 
+
+docker cp 5cb9f3aa34db:/teste pasta/volta/.
+
+```
+### Nomeando Tags e Contêiners
+```bash
+
+anahelena in Docker-Kubernetes/Aula 4 on  main [!] 
+➜  docker run -p 3000:80 -d --rm --name nomeandoMeuConteiner 9f223
+7b83aa31757e5d21d4de9a99e46668784f08c19e40d790b23ec7f50913bc9988
+anahelena in Docker-Kubernetes/Aula 4 on  main [!] 
+➜  docker ps                                                      
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                   NAMES
+7b83aa31757e   9f223     "docker-entrypoint.s…"   13 seconds ago   Up 13 seconds   0.0.0.0:3000->80/tcp, :::3000->80/tcp   nomeandoMeuConteiner
+anahelena in Docker-Kubernetes/Aula 4 on  main [!] 
 
 
+```
 
 
+name: tag
+nome da imagem X versão
+
+```bash
 
 
+➜  docker build -t nomeimagem:latest .   
 
+➜  docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+nomeimagem   latest    31413c0e5030   28 seconds ago   923MB
+<none>       <none>    9f223900b052   35 minutes ago   1.12GB
 
-
-
-
-
-
-
-
-
-
-
+# Rodar um container de nome nomeandoMeuConteiner com essa imagem 
+anahelena in Docker-Kubernetes/Aula2/nodejs-app-starting-setup on  main [!?] took 10,2s 
+➜  docker run -p 3000:80 -d --rm --name nomeandoMeuConteiner nomeimagem:latest 
+b920c0199db4d0e02359becfb07faf2a72681061d657976dabcba16fc79007f9
 
 
 

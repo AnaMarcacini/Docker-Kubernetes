@@ -1,4 +1,5 @@
-FROM node 
+FROM node:12
+#  name : tag
 # procura uma imagem com esse nome no docker hub ou local 
 # no caso como já rodei essa imagem no meu computador local e ela já foi baixada ele vai pegar a imagem local
 
