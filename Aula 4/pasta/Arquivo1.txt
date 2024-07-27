@@ -1,0 +1,32 @@
+Quero transferir esse arquivo para dentro do contêiner utilizando o comando
+
+anahelena in Docker-Kubernetes on  main [!?] 
+➜  cd Aula\ 4 
+anahelena in Docker-Kubernetes/Aula 4 on  main [!?] 
+➜  ls
+pasta
+anahelena in Docker-Kubernetes/Aula 4 on  main [!?] 
+➜  docker cp pasta/. 5cb9f3aa34db:/teste
+Successfully copied 2.56kB to 5cb9f3aa34db:/teste
+
+
+
+______________________
+
+Para fazer o inverso
+
+docker cp 5cb9f3aa34db:/teste pasta/volta/.
+
+
+anahelena in Docker-Kubernetes/Aula 4 on  main [!?] 
+➜  docker cp 5cb9f3aa34db:/teste pasta/volta/.
+Successfully copied 2.56kB to /home/anahelena/GIT/AnaMarcacini/Docker-Kubernetes/Aula 4/pasta/volta/.
+
+
+OBS: O diretorio do contêiner caso não exista é criado porém caso o diretorio não existe no seu pc dá erro
+
+anahelena in Docker-Kubernetes/Aula 4 on  main [!?] 
+➜  docker cp 5cb9f3aa34db:/teste pasta/volta/.
+Successfully copied 0B to /home/anahelena/GIT/AnaMarcacini/Docker-Kubernetes/Aula 4/pasta/volta/.
+stat /home/anahelena/GIT/AnaMarcacini/Docker-Kubernetes/Aula 4/pasta/volta: no such file or directory
+anahelena in Docker-Kubernetes/Aula 4 on  main [!?] 
