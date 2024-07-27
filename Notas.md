@@ -76,6 +76,7 @@ Deleted: sha256:d2c94e258dcb3c5ac2798d32e1249e42ef01cba4841c2234249495f87264ac5a
 Deleted: sha256:ac28800ec8bb38d5c35b49d45a6ac4777544941199075dff8c4eb63e093aa81e
 
 docker image prune # remove todas as imagens que não estão sendo usadas por nenhum container parado ou em execução
+docker image prune -a
 
 anahelena in Docker-Kubernetes/Aula2/nodejs-app-starting-setup on  main [!] 
 ➜  docker image inspect 9f223
@@ -402,3 +403,8 @@ anahelena in Docker-Kubernetes/Aula2/nodejs-app-starting-setup on  main [!?]
  => => exporting layers                                                                                                               
  => => writing image sha256:b571dea73f826d027f8ab9ec0081efd2f783d6dc125f4076e139c6bbec1bb9a2
 ```
+
+
+Uma vantagem do docker é que com ele é possivel compartilhar imagens ente usuarios de duas maneiras 
+      Compartilhar o dockerfile
+      Compartilhar a imagem já contruida 

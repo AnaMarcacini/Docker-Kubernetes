@@ -1,0 +1,20 @@
+ 
+Precisa ter um local com o mesmo nome, para isso existem duas formas de se fazer 
+
+Opção 1 fazer a build com o mesmo nome 
+    CriandoImagemNoRepositorioRemoto
+
+Criar uma copia da imagem com o outro nome 
+
+    EnviandoImagemJáConstruidaParaORepositorioComTag
+
+Fazer Login 
+    LoginNoDocker
+Deslogar 
+    docker logout
+
+Com isso é possivel verificar em docker ps que localmente temos uma imagem com o mesmo nome do diretorio e estamos logados em nossa conta. Assim é possivel fazer push para o repo remoto
+DepoisDeCriadoLocalmenteÉSóFazerPush
+
+
+é possivel criar um container direto da imagem do repositorio remoto. Assim caso o nome da imagem não esteja localmente ele procura no docker hub, porém caso tenha na sua maquina ela dá prioridade e assim pode não pegar a imagem mais decente. Fazendo docker pull garante que a versão seja a mais recente da imagem
