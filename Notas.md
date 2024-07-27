@@ -42,7 +42,8 @@ b6859f84009e   hello-world    "/hello"                 4 days ago          Exite
 sudo docker stop serene_faraday # para a execução do container
 ➜  docker stop $(docker ps -q) # Para todos os containers
 docker start CONTAINER_NAME # executa um container já criado || que foi parado
-docker start -a CONTAINER_NAME # executa um container já criado e faz attach (fica ouvindo os seus logs no terminal)
+docker start -a CONTAINER_NAME # executa um container já criado e faz attach (fica ouvindo os seus logs no terminal) NÃO PERMITE INPUTS
+docker start -a -i CONTAINER_NAME # executa um container já criado e faz attach (fica ouvindo os seus logs no terminal) E PERMITE INPUTS
 
 ➜  sudo docker rm $(sudo docker ps -a -q) ## remove todos os containers
 
@@ -78,6 +79,12 @@ Status: Downloaded newer image for node:latest
 Welcome to Node.js v22.3.0.
 Type ".help" for more information.
 > 
+
+
+➜  docker run -i b8  # Faz com que seja possivel adicionar inputs exemplo do arquivo da aula 3 
+➜  sudo docker run -it b8   # o -it faz com que o terminal do docker seja exposto para a gnt        --- adiciona inputs e outputs       
+
+
 ```
 
 
