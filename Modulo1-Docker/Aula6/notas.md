@@ -81,7 +81,8 @@ anamarcacini in Docker-Kubernetes/Aula2/nodejs-app-starting-setup on  main [?
  => => naming to docker.io/anahelenamarcacini/curso-docker-kubernetes:latest     
 ```
 porem o recomendado para não perder as configurações posteriores é 
-___REMOVENDO O ANTERIOR_____
+
+___REMOVENDO O ANTERIOR___
 ```
 anamarcacini in Docker-Kubernetes on  main [?] 
 ➜  docker image rm 5d1a45a04f2c
