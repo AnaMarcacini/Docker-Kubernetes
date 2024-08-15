@@ -10,3 +10,41 @@ Still, if you then re-create and re-run the container (i.e. you run docker run .
 Now you just start piling up a bunch of unused anonymous volumes - you can clear them via docker volume rm VOL_NAME or docker volume prune.
 
 Ver Arquivo do docker
+
+
+https://headsigned.com/posts/mounting-docker-volumes-with-docker-toolbox-for-windows/
+
+
+```bash
+anamarcacini in Docker-Kubernetes/Modulo2-Data&Volumes/Aula1 on  main [!] 
+➜  docker run -d -p 3000:80 --rm -v feedback:/app/feedback -v "/home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1":/app feedback-node:volume
+70fefda520b1d8c3ca5b081bb5231d6c770ae76f3ca043930555e87ee136af64
+
+```
+
+
+### Problema
+```bash
+
+➜  docker logs 8a626498d945c7d8e874dbc0f117c6386c2462b47cca9f99aaeba525e29345cb
+internal/modules/cjs/loader.js:934
+  throw err;
+  ^
+
+Error: Cannot find module 'express'
+Require stack:
+- /app/server.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:931:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:774:27)
+    at Module.require (internal/modules/cjs/loader.js:1003:19)
+    at require (internal/modules/cjs/helpers.js:107:18)
+    at Object.<anonymous> (/app/server.js:5:17)
+    at Module._compile (internal/modules/cjs/loader.js:1114:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1143:10)
+    at Module.load (internal/modules/cjs/loader.js:979:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:819:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/app/server.js' ]
+}
+```

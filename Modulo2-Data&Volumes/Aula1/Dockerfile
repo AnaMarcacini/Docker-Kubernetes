@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 EXPOSE 80
-# adicionando um volume anonimo 
+# adicionando um volume anonimo ###########################################
 # VOLUME [ "/app/feedback" ] 
 # o docker salva em algum lugar do seu pc e vc nn sabe onde 
 # listando os volumes 
@@ -18,7 +18,7 @@ EXPOSE 80
 
 # volumes anonimos são apagados quando o container for usado
 
-# VOLUMES NOMEADOS SE MANTEM MESMO COM O CONTAINER PARADO
+# VOLUMES NOMEADOS SE MANTEM MESMO COM O CONTAINER PARADO ##########################
 # eles são criados na execução
 
 # docker run -d -p 3000:80 --rm -v feedback:/app/feedback feedback-node:volume
@@ -27,6 +27,20 @@ EXPOSE 80
 # local     feedback
 
 # Assim se eu rodar outro container igual os dados serão reutilizados
+
+
+
+
+# BIND MOUNTS ###################################################################
+
+# igual ao nomeado mas o nome é o caminho completo da pasta do seu dispositivo
+# ➜  docker ➜  docker run -d -p 3000:80 --rm -v feedback:/app/feedback -v /home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1:/app feedback-node:volume              run -d -p 3000:80 --rm -v feedback:/app/feedback -v /home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1:/app feedback-node:volume              
+
+
+# ➜  docker ➜  docker run -d -p 3000:80 --rm -v feedback:/app/feedback -v "/home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1":/app feedback-node:volume              run -d -p 3000:80 --rm -v feedback:/app/feedback -v /home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1:/app feedback-node:volume   
+
+
+
 CMD [ "node", "server.js" ]
 
 # docker build -t feedback-node .
