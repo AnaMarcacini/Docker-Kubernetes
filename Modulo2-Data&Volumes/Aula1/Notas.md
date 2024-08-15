@@ -15,12 +15,17 @@ Ver Arquivo do docker
 https://headsigned.com/posts/mounting-docker-volumes-with-docker-toolbox-for-windows/
 
 
+## Bind Mounts
+
 ```bash
 anamarcacini in Docker-Kubernetes/Modulo2-Data&Volumes/Aula1 on  main [!] 
 ➜  docker run -d -p 3000:80 --rm -v feedback:/app/feedback -v "/home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1":/app feedback-node:volume
 70fefda520b1d8c3ca5b081bb5231d6c770ae76f3ca043930555e87ee136af64
 
 ```
+
+OBS quando coloco o caminho completo de uma pasta no dispositivo vira um volume do tipo Bind Mounts. Com isso a pasta anterior é sobrescrita e assim apaga as bibliotecas instaladas na imagem com o npm install dando esse problema
+
 
 
 ### Problema
@@ -48,3 +53,47 @@ Require stack:
   requireStack: [ '/app/server.js' ]
 }
 ```
+Eu posso criar um repositorio não nomeado (anonimo) para armazenar os dados que eu sobrescreveria e dessa forma não irei perder esses dados
+
+---> -v /app/node_modules equivalente à fazer  VOLUME [ "/app/feedback" ] no dockerfile | cria um volume anonimo
+
+➜  docker run -d -p 3000:80 -v feedback:/app/feedback -v "/home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1":/app -v /app/node_modules feedback-node:volume
+
+
+Os caminhos mais especificos sobrescrevem os menos --> no caso o  /app/node_modules ganha do /app
+
+
+  docker inspect b59b1943dfbea1f0714ab109a87c591026f28dea16f5ee43dc2524312e01547c
+......
+   "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "feedback",
+                "Source": "/var/lib/docker/volumes/feedback/_data",
+                "Destination": "/app/feedback",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/anamarcacini/GIT/AnaMarcacini/Docker-Kubernetes/Modulo2-Data&Volumes/Aula1",
+                "Destination": "/app",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "56eff9954616bc4c8cdeee78b4c230764fbf6dedae748e8cdd6587cc773076c9",
+                "Source": "/var/lib/docker/volumes/56eff9954616bc4c8cdeee78b4c230764fbf6dedae748e8cdd6587cc773076c9/_data",
+                "Destination": "/app/node_modules",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+
+......
